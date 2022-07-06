@@ -1,0 +1,27 @@
+using System;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            ArrayList al = new ArrayList();
+            
+
+            al.Add(Console.ReadLine());
+            al.Add(Console.ReadLine());
+            al.Add(Console.ReadLine());
+            al.Add(Console.ReadLine());
+
+            Console.Write("Contents Of Arraylist:");
+
+            foreach (string str in al)
+            {
+                Console.Write("\n" + str);
+            }
+            Console.ReadLine();
