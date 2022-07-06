@@ -1,0 +1,28 @@
+using System;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] dex = { 1, 2, 3, 4, 5 };
+
+            foreach (int a in dex)
+            {
+                Console.WriteLine(a);
+            }
+
+            Console.ReadKey();
+
+
+
+
+
+        }
+    }
+}
