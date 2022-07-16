@@ -1,0 +1,175 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LIGHT
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+			//Variables			
+			double withdrawal = 0, deposit, balance = 0, loan = 0; ;
+			int accnumber;
+			//String
+			string dollarsign = "$";
+			string longspace = "       ";
+			//OutputHeader
+			void wronginput()
+			{
+				Console.WriteLine($"{longspace}{longspace}Wrong Input...");
+			}
+			void header()
+			{
+				Console.WriteLine($"{longspace}Welcome to Programmers Box Bank ATM");
+				Console.WriteLine("");
+			}
+			void transactionsucessful()
+			{
+				Console.WriteLine($"{longspace}Transaction successful");
+				Console.WriteLine($"{longspace}You current balance is {dollarsign}{string.Format("{0:#,##0.00}", balance)}");
+				Console.WriteLine($"{longspace}Do you want other transaction?");
+				yesorno();
+			}
+			//AccountInformation
+			void accountinfo()
+			{
+				try
+				{
+					Console.WriteLine($"{longspace}  Please type your account number");
+					Console.Write(longspace + longspace);
+					accnumber = Convert.ToInt32(Console.ReadLine());
+					Console.WriteLine("");
+					
+					if (accnumber == 47219980)
+					{
+						balance = 5000;
+						balance -= withdrawal;
+						arrayliststrings();
+						starttransaction();
+					}
+					else if (accnumber == 01081996)
+					{
+						balance = 3500;
+						arrayliststrings();
+						starttransaction();
+					}
+					else
+					{
+						Console.WriteLine($"{longspace}Your account number is not valid");
+						yesorno();
+					}
+				}
+				catch
+				{
+					Console.Clear();
+					repeatall();
+				}
+			}
+
+
+			void arrayliststrings()
+			{
+				
+					Console.WriteLine($"{longspace}  Select transaction do you want");
+					string[] selecttransaction = { "Press(W) Withdrawal", "Press(D) Deposit", "Press(B) Balance Inquiry", "Press(L) LOAN" };
+					foreach (string selections in selecttransaction)
+					{
+						Console.WriteLine($"{longspace}{longspace}{selections}");
+					}
+				}
+				
+			//transaction
+			void starttransaction()
+			{
+				try
+				{
+				
+					Console.Write(longspace + longspace + longspace);
+					char selectedchar = Convert.ToChar(Console.ReadLine());
+					selectedchar = char.ToUpper(selectedchar);
+					switch (selectedchar)
+					{
+						case 'W':
+							Console.WriteLine($"{longspace}{longspace}===WITHDRAWAL===");
+							Console.Write($"{longspace}Please enter amount:");
+							withdrawal = Convert.ToDouble(Console.ReadLine());
+							if (balance > withdrawal)
+							{
+								balance -= withdrawal;
+								transactionsucessful();
+							}
+							else
+							{
+								Console.WriteLine($"{longspace}Sorry but your current balance is not enough...");
+								yesorno();
+							}
+							break;
+						case 'D':
+							Console.WriteLine($"{longspace}{longspace}===DEPOSIT===");
+							Console.Write($"{longspace}Please enter amount:");
+							deposit = Convert.ToDouble(Console.ReadLine());
+							balance += deposit;
+							transactionsucessful();
+							break;
+						case 'B':
+							Console.WriteLine($"{longspace}{longspace}===BALANCE INQUIRY===");
+							transactionsucessful();
+							break;
+						case 'L':
+							Console.WriteLine($"{longspace}{longspace}===LOAN===");
+							Console.Write($"{longspace}Please enter amount:");
+							deposit = Convert.ToDouble(Console.ReadLine());
+							balance += loan;							
+							transactionsucessful();
+							Console.WriteLine($"{longspace}You current credit is {dollarsign}{string.Format("{0:#,##0.00}",loan)}");
+							break;
+						default:
+							wronginput();
+							yesorno();
+							break;
+					}
+				}
+				catch
+				{
+					wronginput();
+					yesorno();
+				}
+			}
+			void yesorno()
+			{
+				Console.WriteLine();
+				Console.WriteLine($"{longspace}{longspace}Press Y to continue...");
+				Console.WriteLine($"{longspace}{longspace}Press other key to exit...");
+				Console.Write(longspace + longspace);
+				string yes = Console.ReadLine().ToUpper();
+				if (yes == "Y")
+				{
+					Console.Clear();
+					repeatall();
+				}
+				else
+				{
+					Environment.Exit(0);					
+				}
+			}
+			void repeatall()
+			{
+				header();
+				accountinfo();
+			}
+			try
+			{
+				repeatall();
+				Console.ReadKey();
+			}
+			catch
+			{
+				Console.Clear();
+				repeatall();
+			}
+		}
+    }
+}
